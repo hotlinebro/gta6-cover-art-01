@@ -3,20 +3,54 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Neon Harbor Cover Studio — GTA-style cover art maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
+  <section class="controls" aria-label="Cover editor">
+    <h1>Neon Harbor <span>Cover Studio</span></h1>
+    <p class="tagline">Your photo, your cast, one sunset poster. Four steps to a PNG.</p>
+    <ol class="steps">
+      <li><b>1</b> Load photos or tap a sample</li>
+      <li><b>2</b> Pick a layout and a grade</li>
+      <li><b>3</b> Crop each panel</li>
+      <li><b>4</b> Export your PNG</li>
+    </ol>
+
+    <label class="field">Photos
+      <input id="photo" type="file" accept="image/*" multiple>
+      <span class="hint">Your photos stay on your machine — never uploaded.</span>
+    </label>
+    <div class="samples" id="samples" aria-label="Sample portraits"></div>
+
+    <label class="field">Panel <span id="panelName">2 · THE KINGPIN</span>
+      <span class="panelRow" id="panelRow"></span>
+    </label>
+    <div class="sliders">
+      <label>Zoom <input id="zoom" type="range" min="1" max="2.6" step="0.05" value="1.85"></label>
+      <label>Left–right <input id="ox" type="range" min="-1" max="1" step="0.05" value="0"></label>
+      <label>Up–down <input id="oy" type="range" min="-1" max="1" step="0.05" value="0"></label>
+    </div>
+    <label class="field">Role tag <input id="role" type="text" maxlength="16" value="THE KINGPIN"></label>
+
+    <label class="field">Title <input id="title" type="text" maxlength="20" value="NEON HARBOR"></label>
+    <label class="field">Subtitle <input id="subtitle" type="text" maxlength="40" value="Chasing the Last Light"></label>
+    <label class="field">Ribbon tagline <input id="tagline" type="text" maxlength="48" value="EVERY CREW NEEDS A WAY OUT"></label>
+    <label class="field">Press quote <input id="quote" type="text" maxlength="48" value="A SUNSET YOU WILL NEVER FORGET"></label>
+
+    <div class="field">Layout <span class="choices" id="layouts"></span></div>
+    <div class="field">Colour grade <span class="choices" id="grades"></span></div>
+    <div class="field">Export size <span class="choices" id="sizes"></span></div>
+
+    <button id="export" type="button">Export PNG</button>
+    <button id="demo" type="button" class="ghost">Load the demo cast</button>
     <p id="status" role="status"></p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <section class="preview" aria-label="Live preview">
+    <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+    <p class="previewHint">Live preview — what you see is what the PNG holds.</p>
+  </section>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
